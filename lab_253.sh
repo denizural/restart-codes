@@ -9,10 +9,23 @@ CHECK_MODE=false
 VERBOSE_MODE=false
 fname=""
 
+
+help_menu() {
+    echo "Usage: $0"
+    echo ""
+    echo "Options and arguments:"
+    echo "-h:                      print help menu and exit"
+    echo "-v:                      verbose mode"
+    echo "-c:                      check mode: no files are created"
+    echo "-p <prefix>:             prefix of the files"
+    echo "-n <number-of-files>:    number of new files to be created"
+}
+
+
 # ===
 # process command line arguments
 # ===
-while getopts "cvp:n:" arg; do
+while getopts "cvhp:n:" arg; do
     case ${arg} in
         c) # check mode (eg. dry run)
             CHECK_MODE=true
@@ -21,6 +34,10 @@ while getopts "cvp:n:" arg; do
         v) # verbose mode
             VERBOSE_MODE=true
             echo "verbose is on"
+            ;;
+        h) # help_menu
+            help_menu
+            exit 0
             ;;
         p) # prefix
             PREFIX=${OPTARG}
@@ -33,6 +50,7 @@ while getopts "cvp:n:" arg; do
             exit 1
     esac
 done
+
 
 
 get_last_file_number() {

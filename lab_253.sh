@@ -36,7 +36,7 @@ done
 
 
 get_last_file_number() {
-        prefix=$1
+    prefix=$1
 
     # if no files are found, then return 0
     files=$(ls -1v ${prefix}* 2>/dev/null)

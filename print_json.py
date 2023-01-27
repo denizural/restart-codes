@@ -21,6 +21,7 @@ import pathlib
 import argparse
 import json
 import logging
+import copy
 
 LOGGING_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG", "NOTSET"]
 
@@ -86,7 +87,24 @@ if __name__ == "__main__":
     logging.basicConfig(format=FORMAT, level=cmd_args.logging)
 
     logging.debug("::: main code is called")
-    print(cmd_args)
+    logging.debug(cmd_args)
 
     # read the JSON file
     json_data = read_json_file(cmd_args.file)
+    
+    # back up original file
+    json_data_backup = copy.deepcopy(json_data)
+    
+    # not the best way of updating the value. Use dpath module
+    original_value = json_data_backup['quiz']['sport']['q1']['options'][0]
+    json_data['quiz']['sport']['q1']['options'][0] = "Hertha Berlin"
+    new_value = json_data['quiz']['sport']['q1']['options'][0]
+    logging.warning(f"Path that is changing is: ['quiz']['sport']['q1']['options'][0]")
+    logging.warning(f"The original value was: {original_value}")
+    logging.warning(f"The updated value is: {new_value}")
+    
+    with open("updated_json_file.json", "wt") as jfile:
+        json_object = json.dump(json_data, indent=4)
+        jfile.write(json_object)
+        
+    

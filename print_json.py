@@ -10,9 +10,17 @@
 """
 
 import os
-import path
+import pathlib
 import argparse
 import json
 import logging
 
+LOGGING_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG", "NOTSET"]
 
+# logging information
+FORMAT = '%(levelname)-8s | %(message)s'
+logging.basicConfig(format=FORMAT, level=logging.DEBUG)
+
+
+if __name__ == "__main__":
+    logging.debug("::: main code is called")

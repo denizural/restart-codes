@@ -66,12 +66,13 @@ def check_command_line_args(cmd_args):
 
     return True
 
+
 def read_json_file(json_fpath):
     try:
         with open(json_fpath, "rt") as jfile:
             data = json.load(jfile)
             logging.debug(f"successfully read the json file: {json_fpath}")
-            return data        
+            return data
     except Exception as err:
         logging.critical(f"ERROR reading the json file: {err}")
 
@@ -86,6 +87,6 @@ if __name__ == "__main__":
 
     logging.debug("::: main code is called")
     print(cmd_args)
-       
+
     # read the JSON file
     json_data = read_json_file(cmd_args.file)

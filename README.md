@@ -1,0 +1,1 @@
+This repository contains some basic coding exercises I wrote during the AWS re/start course.

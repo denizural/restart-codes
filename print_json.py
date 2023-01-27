@@ -24,6 +24,7 @@ import logging
 
 LOGGING_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG", "NOTSET"]
 
+
 def parse_command_line_args():
     prog_name = pathlib.Path(sys.argv[0]).name
 
@@ -34,7 +35,8 @@ def parse_command_line_args():
     )
 
     parser.add_argument(
-        "-f", "--file",
+        "-f",
+        "--file",
         type=str,
         required=True,
         help="path to metadata csv file",
@@ -56,20 +58,22 @@ def check_command_line_args(cmd_args):
     if not file_path.is_file():
         err_msg = f"{cmd_args.file} is not a valid file or it does not exist"
         raise ValueError(err_msg)
-    
+
     # Check if the command line arguments are valid
     if cmd_args.logging not in LOGGING_LEVELS:
         err_msg = f"{cmd_args.logging} is not a valid logging level"
-        raise ValueError(err_msg)        
-    
+        raise ValueError(err_msg)
+
     return True
 
 
 if __name__ == "__main__":
-    logging.debug("::: main code is called")
     cmd_args = parse_command_line_args()
     check_command_line_args(cmd_args)
 
     # logging information
-    FORMAT = '%(levelname)-8s | %(message)s'
+    FORMAT = "%(levelname)-8s | %(message)s"
     logging.basicConfig(format=FORMAT, level=cmd_args.logging)
+
+    logging.debug("::: main code is called")
+    print(cmd_args)

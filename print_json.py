@@ -104,7 +104,7 @@ if __name__ == "__main__":
     logging.warning(f"The updated value is: {new_value}")
     
     with open("updated_json_file.json", "wt") as jfile:
-        json_object = json.dump(json_data, indent=4)
+        json_object = json.dumps(json_data, indent=4)
         jfile.write(json_object)
         
     
